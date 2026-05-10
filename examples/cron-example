@@ -1,25 +1,22 @@
 # ================================================================
-# GitHub Streak Keeper - Ejemplo de Cron Job
+# GitHub Streak Keeper - Cron Example
 # ================================================================
-# 
-# Instrucciones:
-# 1. Abre el crontab: crontab -e
-# 2. Copia y pega las líneas de abajo
-# 3. Ajusta la ruta del script si es necesario
-# 4. Guarda y sale
 #
-# Verificar instalación: crontab -l
+# Recomendación: usarlo como mantenimiento real, no como spam de commits.
+# Empieza con STREAK_KEEPER_DRY_RUN=1 y revisa logs antes de activar push.
+#
+# Ver crontab actual:
+#   crontab -l
+#
+# Editar crontab:
+#   crontab -e
 # ================================================================
 
-# GitHub Streak Keeper - 6 commits diarios distribuidos
-# Horarios: 8am, 10am, 12pm, 2pm, 4pm, 6pm (hora local)
+# Simulación diaria a las 8:30 AM
+30 8 * * * STREAK_KEEPER_DRY_RUN=1 /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh /home/carlosdev/proyectos/mi-proyecto >> /tmp/streak-keeper.log 2>&1
 
-0 8 * * * /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh >> /tmp/streak-keeper.log 2>&1
-0 10 * * * /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh >> /tmp/streak-keeper.log 2>&1
-0 12 * * * /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh >> /tmp/streak-keeper.log 2>&1
-0 14 * * * /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh >> /tmp/streak-keeper.log 2>&1
-0 16 * * * /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh >> /tmp/streak-keeper.log 2>&1
-0 18 * * * /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh >> /tmp/streak-keeper.log 2>&1
+# Producción diaria a las 9:00 AM con push habilitado
+0 9 * * * STREAK_KEEPER_PUSH=1 /home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh /home/carlosdev/proyectos/mi-proyecto >> /tmp/streak-keeper.log 2>&1
 
 # ================================================================
 # COMANDOS ÚTILES
@@ -28,16 +25,10 @@
 # Ver logs en tiempo real:
 #   tail -f /tmp/streak-keeper.log
 #
-# Ver últimas 20 líneas:
-#   tail -n 20 /tmp/streak-keeper.log
+# Ver últimas 50 líneas:
+#   tail -n 50 /tmp/streak-keeper.log
 #
-# Ver crontab actual:
-#   crontab -l
-#
-# Editar crontab:
+# Eliminar jobs manualmente:
 #   crontab -e
-#
-# Eliminar todas las jobs:
-#   crontab -r
 #
 # ================================================================

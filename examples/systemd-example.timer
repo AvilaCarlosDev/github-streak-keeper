@@ -1,20 +1,17 @@
 [Unit]
-Description=Run GitHub Streak Keeper every 2 hours
+Description=Run GitHub Streak Keeper real maintenance daily
 Documentation=https://github.com/AvilaCarlosDev/github-streak-keeper
 Requires=streak-keeper.service
 
 [Timer]
-# Esperar 10 minutos después del boot
-OnBootSec=10min
+# Ejecutar una vez al día a las 9:00 AM
+OnCalendar=*-*-* 09:00:00
 
-# Ejecutar cada 2 horas
-OnUnitActiveSec=2h
+# Ejecutar si el equipo estaba apagado a esa hora
+Persistent=true
 
 # Unidad a activar
 Unit=streak-keeper.service
-
-# Hacer el timer persistente (recuerda última ejecución)
-Persistent=true
 
 [Install]
 WantedBy=timers.target

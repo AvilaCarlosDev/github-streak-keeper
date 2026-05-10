@@ -1,19 +1,19 @@
 [Unit]
-Description=GitHub Streak Keeper - Auto Commit Service
+Description=GitHub Streak Keeper - Real Maintenance Service
 Documentation=https://github.com/AvilaCarlosDev/github-streak-keeper
-After=network.target
+After=network-online.target
 
 [Service]
 Type=oneshot
-User=carlosdev
 WorkingDirectory=/home/carlosdev/proyectos/github-streak-keeper
-ExecStart=/home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh
+
+# Empieza con dry-run. Cambia a STREAK_KEEPER_PUSH=1 cuando confirmes que todo está bien.
+# Environment=STREAK_KEEPER_DRY_RUN=1
+Environment=STREAK_KEEPER_PUSH=1
+
+ExecStart=/home/carlosdev/proyectos/github-streak-keeper/auto-commit.sh /home/carlosdev/proyectos/mi-proyecto
 StandardOutput=journal
 StandardError=journal
 
-# Reiniciar si falla (opcional)
-Restart=on-failure
-RestartSec=60
-
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
